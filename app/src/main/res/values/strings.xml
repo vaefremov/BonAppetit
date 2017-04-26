@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">BonAppetit</string>
+    <array name="categories">
+        <item>Рыба</item>
+        <item>Мясо</item>
+        <item>Ни рыба, ни мясо</item>
+    </array>
+    <array name="fishes">
+        <item>Судак</item>
+        <item>Лещ</item>
+        <item>Сом</item>
+    </array>
+    <array name="meats">
+        <item>Баранина</item>
+        <item>Свинина</item>
+        <item>Ослятина</item>
+    </array>
+    <array name="others">
+        <item>Ослятитки с фасолями</item>
+        <item>Fried fucks</item>
+    </array>
+</resources>
