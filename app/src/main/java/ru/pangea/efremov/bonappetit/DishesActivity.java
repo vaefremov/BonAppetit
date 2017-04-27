@@ -20,9 +20,9 @@ public class DishesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dishes);
-        int categoryNumber = getIntent().getIntExtra(Intent.EXTRA_TEXT, 0);
+        final int categoryNumber = getIntent().getIntExtra(Intent.EXTRA_TEXT, 0);
         dishes = findDishesListByCategory(categoryNumber);
-        BaseAdapter adapter = new DishesListAdapter(this, dishes);
+        BaseAdapter adapter = new DishesListAdapter(this, categoryNumber);
         listView = (ListView) findViewById(R.id.dishes_list_view);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -31,6 +31,7 @@ public class DishesActivity extends AppCompatActivity {
                 Toast.makeText(DishesActivity.this, dishes[position], Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(DishesActivity.this, DishDetailsActivity.class);
                 i.putExtra(Intent.EXTRA_TEXT, dishes[position]);
+                i.putExtra(Intent.EXTRA_INDEX, categoryNumber);
                 startActivity(i);
             }
         });

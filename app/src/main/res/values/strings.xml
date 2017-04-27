@@ -19,4 +19,8 @@
         <item>Ослятитки с фасолями</item>
         <item>Fried fucks</item>
     </array>
+    <string name="fried_ficks_description">Это типичный пример Chinglish: подпись к блюду на шведском столе.
+        Я это снял по-моему в ВеньЖоу, очень веселились. Там же были и другие развлечения, вроде помидоров с сахаром. Китай рулит!
+    </string>
+    <string name="default_picture_uri">"http://assets.bonappetit.com/photos/58e2aa9cc1779b17cf869bc9/16:9/w_1028,c_limit/0417-stir-fry-pork-bok-choy%20edit.jpg"</string>
 </resources>

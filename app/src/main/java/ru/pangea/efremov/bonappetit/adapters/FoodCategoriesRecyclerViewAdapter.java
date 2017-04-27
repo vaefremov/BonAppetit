@@ -1,6 +1,7 @@
 package ru.pangea.efremov.bonappetit.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import ru.pangea.efremov.bonappetit.R;
+import ru.pangea.efremov.bonappetit.datasource.BonAppetitDAO;
+import ru.pangea.efremov.bonappetit.datasource.DefaultBonAppetitDAO;
 
 /**
  * Created by efremov on 26/04/17.
@@ -57,7 +60,7 @@ public class FoodCategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Food
         return categories == null ? 0 : categories.length;
     }
 
-     class FoodKindViewHolder extends RecyclerView.ViewHolder {
+    class FoodKindViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView categoryImage;
         private TextView categoryDescription;
@@ -69,23 +72,16 @@ public class FoodCategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Food
         }
 
         public void bind(String categoryName, int position) {
+            BonAppetitDAO dao = DefaultBonAppetitDAO.getInstance();
             categoryDescription.setText(categoryName);
-//            categoryImage.setImageResource(R.mipmap.ic_launcher);
-            String imageUrl;
-            switch(position) {
-                case 0:
-                    imageUrl = "http://pngimg.com/uploads/fish/fish_PNG25151.png";
-                    break;
-                case 1:
-                    imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr9bacuBPTUsPmug6XFBaZz0k1rxUI7rkVdOfYYIeFmwgtXrU";
-                    break;
-                default:
-                    imageUrl = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQbX9GWf3OmCUQF7xG3PXEEF_QRxww5USxaQSPRyEOAlmxgr1Ue";
-                    break;
+            Uri imageUrl = dao.getCategoryIconUriByNum(position);
+            if (imageUrl != null) {
+                Picasso.with(context)
+                        .load(imageUrl)
+                        .into(categoryImage);
+            } else {
+                categoryImage.setImageResource(dao.getCategoryIconResByNum(position));
             }
-            Picasso.with(context)
-                    .load(imageUrl)
-                    .into(categoryImage);
         }
     }
 

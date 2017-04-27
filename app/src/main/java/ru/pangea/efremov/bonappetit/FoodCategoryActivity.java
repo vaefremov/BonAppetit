@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import ru.pangea.efremov.bonappetit.adapters.FoodCategoriesRecyclerViewAdapter;
+import ru.pangea.efremov.bonappetit.datasource.BonAppetitDAO;
+import ru.pangea.efremov.bonappetit.datasource.DefaultBonAppetitDAO;
 
 public class FoodCategoryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -15,10 +17,15 @@ public class FoodCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DefaultBonAppetitDAO.initializeForContext(this);
+        BonAppetitDAO dao = DefaultBonAppetitDAO.getInstance();
         setContentView(R.layout.activity_food_category);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         FoodCategoriesRecyclerViewAdapter adapter = new FoodCategoriesRecyclerViewAdapter(this,
-                getResources().getStringArray(R.array.categories), onNameClick);
+                dao.getCategoriesNames(), onNameClick);
+//        FoodCategoriesRecyclerViewAdapter adapter = new FoodCategoriesRecyclerViewAdapter(this,
+//                getResources().getStringArray(R.array.categories), onNameClick);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
